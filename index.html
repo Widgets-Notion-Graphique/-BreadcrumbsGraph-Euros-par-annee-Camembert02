@@ -1,0 +1,102 @@
+</div>
+  <div class="py-6 mt-4 grid place-items-center px-2">
+    <div id="pie-chart"></div>
+  </div>
+</div>
+
+<!-- CSS  -->
+<style>
+  
+  html, body {
+  height: 100%;
+  margin: 0;
+  background: none;
+}
+
+ .grid {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;    /* Centre verticalement */
+  height: 100vh;          /* Hauteur de la page entière */
+} 
+  
+</style>
+ 
+<!-- SCRIPT  -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+  
+  
+  // JS 
+ // MONTANT 
+const chartConfig = {
+  series: [1200, 
+           1000, 
+           500, 
+           980, 
+           2000], // Montants en euros
+  
+  // STYLE 
+  chart: {
+    type: "pie",
+    width: '100%',   // Largeur adaptative
+    height: '100%',  // Hauteur adaptative
+    toolbar: {
+      show: false,
+    },
+  },
+  
+  // RESPONSIVE 
+  responsive: [{
+    breakpoint: 480, // Adaptation pour écrans plus petits
+    options: {
+      chart: {
+        width: 300,   // Taille plus petite pour les petits écrans
+        height: 300,
+      },
+      legend: {
+        position: "bottom",
+      }
+    }
+  }],
+  
+  // TITRE 
+  title: {
+    show: "",
+  },
+  
+  // DATA STYLE 
+  dataLabels: {
+    enabled: true,
+    formatter: function (val, opts) {
+      // Affiche la valeur en euros au lieu du pourcentage
+      return opts.w.config.series[opts.seriesIndex] + " €";
+    },
+  },
+  
+  // COULEURS 
+  colors: ["#020617", 
+           "#ff8f00", 
+           "#00897b", 
+           "#1e88e5", 
+           "#d81b60"],
+  
+  // AFFICHAGE LEGEND 
+  legend: {
+    show: true,
+    position: "bottom", // Afficher la légende en bas
+  },
+  
+  // ANNEE 
+  labels: ["2024", 
+           "2025", 
+           "2026", 
+           "2027", 
+           "2028"], // Années pour chaque tranche du camembert
+};
+  
+  // RENDU 
+const chart = new ApexCharts(document.querySelector("#pie-chart"), chartConfig);
+  
+  chart.render();
+</script>
